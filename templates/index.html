@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/text.png') }}">
+
+    <title>TCom</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+
+        .top-left-image {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        header {
+            color:white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+           /* background-image: url('/static/images/.jpg'); /* Chemin correct relatif à partir du répertoire static */
+            background-size: cover; /* Ajuste l'image pour couvrir toute la page */
+            background-position: center; /* Centre l'image */
+            background-repeat: no-repeat; /* Empêche la répétition de l'image */
+            background-attachment: fixed;
+        }
+
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header h1 {
+            animation: slideIn 2s ease-in-out;
+            position: absolute;
+            top: 20px; /* Ajustez la position verticale selon votre besoin */
+            left: 20px; /* Ajustez la position horizontale selon votre besoin */
+            font-size: 30px; /* Taille du texte */
+        }
+
+       .navigation {
+
+            padding: 10px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navigation ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: right;
+        }
+
+        .navigation ul li {
+            margin: 0 15px;  /* margin: 0 15px; : Ajoute une marge de 0 pixels en haut et en bas, et de 15 pixels à gauche et à droite autour de chaque élément de la liste.*/
+        }
+
+        .navigation ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 14px; /* Réduire la taille du texte des liens */
+            font-weight: bold;
+            padding: 8px 12px; /* Ajuster le padding autour du texte */
+            border-radius: 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+
+        .navigation ul li a:hover {
+            background-color: white;
+            color: #87CEEB;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        .section {
+            width: 80%;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .textarea-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .textarea-wrapper {
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        .fich {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            flex: 1;
+            margin-right: 210px;
+        }
+
+        .textarea-wrapper:last-child {
+            margin-right: 0;
+        }
+
+        .textarea-wrapper label {
+            display: block;  /*: Fait en sorte que chaque label soit affiché comme un bloc distinct.*/
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: cornflowerblue;
+        }
+
+        .textarea-wrapper textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color:cornflowerblue;
+        }
+
+        input[type="file"] {
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        input[type="submit"], input[type="button"] {
+            background-color:cornflowerblue;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover, input[type="button"]:hover {
+            background-color: #87CEEB;
+        }
+
+        h3{
+            color:cornflowerblue;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+
+
+        .background-after-section {
+            background-color: black;
+            padding: 20px;
+        }
+
+        .lien{
+            color:#87CEEB;
+            text-underline:none ;
+        }
+        .lien:hover {
+            background-color: white;
+            color: #87CEEB;
+        }
+
+        .img{
+            position: absolute;
+            top: 0px; /* Ajuste la position verticale */
+            left: 5px; /* Ajuste la position horizontale */
+            width: 100px; /* Ajuste la largeur */
+            height: auto; /* Maintient le ratio de l'image */
+            z-index: 1; /* Assure que l'image est au-dessus de l'en-tête */
+        }
+        body {
+            font-family: 'Times New Roman', serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+            color: #333;
+            background-image: url('/static/images/deesign.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        }
+        .graphe {
+            display: flex;
+            justify-content: center;
+            width: 80%; /* Assure que l'élément graphe occupe toute la largeur disponible */
+            margin: 0 auto; /* Pour centrer horizontalement */
+        }
+        .highlight {
+            text-decoration: underline;
+        }
+
+
+
+    </style>
+</head>
+<body class ="background-after-section">
+ <img class="img" src="{{ url_for('static', filename='images/com.png') }}" alt="not found">
+    <header>
+        <h1>Analyse Textuelle</h1>
+    </header>
+    <nav class="navigation">
+        <ul>
+            <li><a href="#" onclick="showSection('compare-section')">Comparer </a></li>
+            <li><a href="#" onclick="showSection('summary-section')">Résumer </a></li>
+            <li><a href="#" onclick="showSection('search-section')">Rechercher</a></li>
+        </ul>
+    </nav>
+
+
+
+    <main class="container">
+        <!-- Section de Comparaison -->
+        <section class="section active" id="compare-section"><!-- Section dédiée à la comparaison de textes, identifiée par l'ID "compare-section" et active par défaut. -->
+            <h2>Comparaison</h2>
+            <form action="/compare" method="post" enctype="multipart/form-data">
+                <div class="textarea-container">
+                    <div class="textarea-wrapper">
+                        <label for="text1">Texte 1 :</label>
+                        <textarea placeholder="Tapez votre texte ici" id="text1" name="text1" rows="20"></textarea>
+                     </div>
+                     <div class="textarea-wrapper">
+                          <label for="text2">Texte 2 :</label>
+                            <textarea placeholder="Tapez votre texte ici" id="text2" name="text2" rows="20"></textarea>
+                    </div>
+                 </div>
+                <div class="fich">
+                     <input type="file" id="file1" name="file1">
+                     <input type="file" id="file2" name="file2">
+                </div>
+               <br><br>
+                <input type="submit" value="Comparer">
+            </form>
+
+            <!-- Résultat de la Comparaison -->
+            {% if comparison_results %}
+            <div class="result">
+                <h3>Résultat de la Comparaison</h3><br><br>
+                <p><strong>Texte 1 :</strong> <br>{{ comparison_results.text1 }}</p>
+                <p><strong>Sentiment_Texte 1 :</strong></p>
+                <ul>
+                    <li><strong>Positif :</strong> {{ comparison_results.sentiment1.pos }}</li>
+                    <li><strong>Négatif :</strong> {{ comparison_results.sentiment1.neg }}</li>
+                    <li><strong>Neutre :</strong> {{ comparison_results.sentiment1.neu }}</li>
+                </ul><br>
+                <p><strong>Texte 2 :</strong> <br>{{ comparison_results.text2 }}</p>
+                <p><strong>Sentiment_Texte 2 :</strong></p>
+                <ul>
+                    <li><strong>Positif :</strong> {{ comparison_results.sentiment2.pos }}</li>
+                    <li><strong>Négatif :</strong> {{ comparison_results.sentiment2.neg }}</li>
+                    <li><strong>Neutre :</strong> {{ comparison_results.sentiment2.neu }}</li>
+                </ul><br>
+                <p><strong>Similarité par signification :</strong> {{ comparison_results.similarity_spacy }}%</p>
+                <p><strong>Similarité (Basé sur les Mots Communs):</strong> {{ comparison_results.similarity_percentage_nltk }}%</p><br>
+                <p><strong>Mots communs :</strong> {{ comparison_results.common_words }}</p><br>
+                <p><strong>Mots uniques_Texte 1 :</strong> {{ comparison_results.unique_to_text1 }}</p>
+                <p><strong>Mots uniques_Texte 2 :</strong> {{ comparison_results.unique_to_text2 }}</p>
+
+                <img  class="graphe" src="{{ url_for('static', filename='similarity_plot.png') }}" alt="Graphique de Similarité" width="500">
+
+                <h3> Télécharger votre résultat</h3>
+                <a class="lien" href="{{ url_for('download_pdf', pdf_path=pdf_path) }}"> Cliquer ici </a>
+
+            </div>
+            {% endif %}
+
+        </section>
+
+        <!-- Section de Résumé -->
+<section class="section" id="summary-section">
+    <h2>Résumé de Texte</h2>
+    <form id="summary-form" enctype="multipart/form-data">
+        <label for="text_to_summarize">Texte à Résumer :</label><br>
+        <textarea placeholder="Tapez votre texte ici" id="text_to_summarize" name="text_to_summarize" rows="15" cols="120"></textarea>
+        <input type="file" id="file_to_summarize" name="file_to_summarize"><br><br>
+        <input type="button" value="Résumer" onclick="summarizeText()">
+    </form>
+
+    <!-- Résultat du Résumé -->
+    <div id="summary-results" class="result" style="display: none;"><!--style="display: none;" est utilisée pour masquer un élément <div> qui contient les résultats du résumé de texte jusqu'à ce qu'une action utilisateur (comme cliquer sur un bouton) rende l'élément visible.-->
+        <h3>Résumé du Texte</h3>
+        <p><strong>Texte Original :</strong><br> <span id="original_text"></span></p><!--le texte à afficher sera inséré dynamiquement dans le span avec l'identifiant original_text à l'aide de JavaScript.-->
+        <p><strong>Résumé :</strong> <br><span id="summary_text"></span></p>
+    </div>
+</section>
+
+<script>
+    function summarizeText() {
+        var formData = new FormData();
+        formData.append('text_to_summarize', document.getElementById('text_to_summarize').value);// Ajoute le premier fichier sélectionné dans le champ de fichier avec l'ID file_to_summarize.
+        formData.append('file_to_summarize', document.getElementById('file_to_summarize').files[0]);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/summarize', true);
+        xhr.onload = function() {
+            if (xhr.status === 200) { <!--Vérifie si le statut de la réponse HTTP est 200 (OK), ce qui indique que la requête a réussi.-->
+                var response = JSON.parse(xhr.responseText);
+                document.getElementById('original_text').textContent = response.original_text;
+                document.getElementById('summary_text').textContent = response.summary;
+                document.getElementById('summary-results').style.display = 'block'; // Afficher les résultats
+            } //met à jour dynamiquement la page web avec le texte original et son résumé généré par le serveur sans recharger la page entière.
+        };
+        xhr.send(formData);<!--Envoie la requête HTTP POST au serveur avec les données contenues dans l'objet FormData formData.-->
+    }
+    //ce script JavaScript permet à l'utilisateur de soumettre un texte à résumer et de recevoir en retour un résumé généré par le serveur, qui est ensuite affiché dynamiquement sur la page web sans recharger la page entière, grâce à l'utilisation de techniques AJAX avec XMLHttpRequest.
+</script>
+
+        <!-- Section de Recherche de Mot ou Phrase -->
+<section class="section" id="search-section">
+    <h2>Recherche de Mot ou Phrase</h2>
+    <form id="search-form" enctype="multipart/form-data">
+        <label for="text_to_search">Texte pour Rechercher :</label><br>
+        <textarea placeholder="Tapez votre texte ici" id="text_to_search" name="text_to_search" rows="15" cols="120"></textarea><br>
+        <input type="file" id="file_to_search" name="file_to_search"><br><br>
+        <label for="word_to_find">Mot ou Phrase à rechercher :</label>
+        <input type="text" id="word_to_find" name="word_to_find"><br><br>
+        <input type="button" value="Rechercher" onclick="searchWord()">
+    </form>
+
+    <!-- Résultat de la Recherche de Mot ou Phrase -->
+    <div id="search-results" class="result" style="display: none;">
+        <h3>Résultat de la recherche </h3>
+        <p><strong>Texte:</strong><br> <span id="text_to_search_result"></span></p>
+        <p><strong>Mot ou phrase recherché :</strong> <span id="word_to_find_result"></span></p>
+        <p><strong>Occurrences :</strong> <span id="occurrences_result"></span></p>
+
+        <!-- Affichage du texte avec la première occurrence du mot ou phrase soulignée -->
+        <div id="highlighted-text-result"></div>
+    </div>
+</section>
+
+<script>
+    function searchWord() {
+        var formData = new FormData();
+        formData.append('text_to_search', document.getElementById('text_to_search').value);
+        formData.append('word_to_find', document.getElementById('word_to_find').value);
+        formData.append('file_to_search', document.getElementById('file_to_search').files[0]);
+
+        var xhr = new XMLHttpRequest();
+        //Historiquement, AJAX utilisait l'objet XMLHttpRequest pour communiquer avec le serveur. Cet objet permet de récupérer des données depuis un serveur sans recharger la page complète.
+        xhr.open('POST', '/search-word', true);
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                document.getElementById('text_to_search_result').textContent = response.text_to_search;
+                document.getElementById('word_to_find_result').textContent = response.word_to_find;
+                document.getElementById('occurrences_result').textContent = response.occurrences;
+
+                var highlightedTextDiv = document.getElementById('highlighted-text-result');
+                if (response.word_found) {
+                    highlightedTextDiv.innerHTML = response.highlighted_text;
+                } else {
+                    highlightedTextDiv.innerHTML = "<p><strong>Aucune occurrence trouvée pour le mot ou phrase spécifié.</strong></p>";
+                }
+
+                document.getElementById('search-results').style.display = 'block'; // Afficher les résultats
+            }
+        };
+        xhr.send(formData);
+    }
+</script>
+
+    </main>
+
+</body>
+</html>
+
+    <script>
+        function showSection(sectionId) {
+            // Cacher toutes les sections
+            var sections = document.querySelectorAll('.section');
+            sections.forEach(function(section) {
+                section.classList.remove('active');<!--: Supprime la classe CSS 'active' de chaque élément section. La classe 'active' est souvent utilisée pour indiquer quelle section est actuellement visible ou sélectionnée.-->
+            });
+
+            // Afficher la section sélectionnée
+            var selectedSection = document.getElementById(sectionId);
+            selectedSection.classList.add('active');<!--près l'exécution de cette partie du code, la section spécifiée par sectionId devient visible à l'écran en raison de l'ajout de la classe 'active'.-->
+
+            // Si la section activée est la section de recherche, souligner la première occurrence du mot ou phrase
+            if (sectionId === 'search-section') {
+                highlightFirstOccurrence();
+            }
+        }
+
+        function highlightFirstOccurrence() {
+    var searchText = "search_results.word_to_find";
+    if (searchText) {
+        var paragraph = document.getElementById('highlighted-text');
+        var text = paragraph.innerHTML;
+
+        console.log("Texte complet:", text);
+
+        // Trouver la première occurrence du mot ou phrase recherché
+        var startIndex = text.toLowerCase().indexOf(searchText.toLowerCase());<!-- Convertit le texte et la recherche en minuscules (pour une recherche insensible à la casse) et utilise indexOf() pour trouver l'index de la première occurrence de searchText dans text.-->
+        console.log("Index de début:", startIndex);
+
+        if (startIndex !== -1) {
+            // Extraire le contexte autour de la première occurrence
+            var contextLength = 50; // Longueur du contexte avant et après la première occurrence
+            var beforeText = text.substring(Math.max(0, startIndex - contextLength), startIndex);
+            console.log("Avant le texte souligné:", beforeText);
+
+            var highlightedText = text.substring(startIndex, startIndex + searchText.length);
+            console.log("Texte souligné:", highlightedText);
+
+            var afterText = text.substring(startIndex + searchText.length, startIndex + searchText.length + contextLength);
+            console.log("Après le texte souligné:", afterText);
+
+            // Construire le texte avec la première occurrence soulignée
+            var finalText = beforeText + '<span class="highlight">' + highlightedText + '</span>' + afterText;
+            console.log("Texte final:", finalText);
+
+            // Mettre à jour le contenu de l'élément HTML
+            paragraph.innerHTML = finalText;
+        }
+    }
+}
+
+    </script>
+</body>
+</html>
