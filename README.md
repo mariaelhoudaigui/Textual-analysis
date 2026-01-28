@@ -36,12 +36,12 @@ The backend of the application exposes the following API endpoints:
 
 
 # **Demonstration**
-<img src="Comparison.png" alt="Homepage">
-<img src="Comparisonresult.png" alt="Homepage">
-<img src="Comparison result2.png" alt="Homepage">
-<img src="resume.png" alt="Homepage">
-<img src="resume2.png" alt="Homepage">
-<img src="recherche.png" alt="Homepage">
-<img src="resultatrecherche.png" alt="Homepage">
+<img src="Comparison.png" alt="Homepage" width="400">
+<img src="Comparisonresult.png" alt="Homepage" width="400">
+<img src="Comparison result2.png" alt="Homepage" width="400">
+<img src="resume.png" alt="Homepage" width="400">
+<img src="resume2.png" alt="Homepage" width="400">
+<img src="recherche.png" alt="Homepage" width="400">
+<img src="resultatrecherche.png" alt="Homepage" width="400">
 
 
