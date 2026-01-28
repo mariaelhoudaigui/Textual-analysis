@@ -32,3 +32,16 @@ The backend of the application exposes the following API endpoints:
 - **POST /search_word**: Search for specific words or phrases in a text.
 - **GET /download_pdf**: Download the PDF report of the comparison .
 - **GET /**: Landing page.
+
+
+
+# **Demonstration**
+<img src="Comparison.png" alt="Homepage">
+<img src="Comparisonresult.png" alt="Homepage">
+<img src="Comparison result2.png" alt="Homepage">
+<img src="resume.png" alt="Homepage">
+<img src="resume2.png" alt="Homepage">
+<img src="recherche.png" alt="Homepage">
+<img src="resultatrecherche.png" alt="Homepage">
+
+
